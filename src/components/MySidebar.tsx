@@ -1,8 +1,15 @@
-
 "use client";
 
 import { Sidebar } from "flowbite-react";
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
+import {
+  HiArrowSmRight,
+  HiChartPie,
+  HiInbox,
+  HiShoppingBag,
+  HiTable,
+  HiUser,
+  HiViewBoards,
+} from "react-icons/hi";
 
 export function MySidebar() {
   return (
@@ -12,7 +19,12 @@ export function MySidebar() {
           <Sidebar.Item href="#" icon={HiChartPie}>
             Dashboard
           </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiViewBoards} label="Pro" labelColor="dark">
+          <Sidebar.Item
+            href="#"
+            icon={HiViewBoards}
+            label="Pro"
+            labelColor="dark"
+          >
             Kanban
           </Sidebar.Item>
           <Sidebar.Item href="#" icon={HiInbox} label="3">
