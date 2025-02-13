@@ -3,6 +3,10 @@ import ButtonLink from "./components/ButtonLink";
 import { TextInput } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { api } from "./services/api";
+import { helper } from "./services/helper";
+import { Category } from "./types/types";
 
 const dummmyHighlights = [
   {
@@ -87,7 +91,32 @@ ImageCard.propTypes = {
   caption: PropTypes.string,
 };
 
+const fetchCategories = async (setLoading, setData) => {
+  try {
+    console.log('fetching categories');
+    setLoading(true);
+    const data = await api.getCategories();
+    const randomIndexes = helper.getNRandomIntegersInRange(0, data.length, 4);
+    console.log(data);
+    const randomizedCategories = [];
+    for (let i = 0; i < 4; i++) {
+      randomizedCategories.push(data[randomIndexes[i]]);
+    }
+    setData(randomizedCategories);
+  } catch (error) {
+    console.log('Failed to fetch post ', error);
+  }
+}
+
+
 function Home() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
+
+  useEffect(() => {
+    fetchCategories(setIsCategoriesLoading, setCategories);
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <h5 className="mt-6 text-xl font-bold tracking-wider">
@@ -112,12 +141,15 @@ function Home() {
         </div>
       </div>
       <div className="mb-4 grid grid-cols-2 gap-5">
-        {dummmyHighlights.map((dummy, index) => (
+        {categories.map((category, index) => (
+          <Link to={`/recipes/category/${category.Slug}`} key={index}
+          state={{ category }}>
           <ImageCard
             key={index}
-            filename={dummy.filename}
-            caption={dummy.caption}
+            filename={dummmyHighlights[index].filename}
+            caption={category.Name}
           />
+          </Link>
         ))}
       </div>
 
