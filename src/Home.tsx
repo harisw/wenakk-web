@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { api } from "./services/api";
-import { helper } from "./services/helper";
+import { getNRandomIntegersInRange } from "./services/helper";
 import { Category } from "./types/types";
 
 const dummmyHighlights = [
@@ -96,7 +96,7 @@ const fetchCategories = async (setLoading, setData) => {
     console.log('fetching categories');
     setLoading(true);
     const data = await api.getCategories();
-    const randomIndexes = helper.getNRandomIntegersInRange(0, data.length, 4);
+    const randomIndexes = getNRandomIntegersInRange(0, data.length, 4);
     console.log(data);
     const randomizedCategories = [];
     for (let i = 0; i < 4; i++) {

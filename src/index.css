@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.font-highlight {
+  color: #D70654;
+}
+.font-main {
+  color: #FFD95F;
+}
+.bg-action {
+  background-color: #B8D576;
+}
+.bg-default {
+  background-color: #FFEFC8;
+}
+.bg-main {
+  background-color: #FFD95F;
+}

@@ -10,23 +10,24 @@ interface MyBreadCrumbProps {
 
 const MyBreadCrumb: React.FC<MyBreadCrumbProps> = ({ category }) =>{
   return (
-    <Breadcrumb aria-label="Solid background breadcrumb example" className="bg-gray-50 px-5 py-3 dark:bg-gray-800">
+    <div className="px-6 w-full">
+    <Breadcrumb aria-label="Solid background breadcrumb example" className="bg-main px-5 py-3 dark:bg-gray-800 rounded">
       <BreadcrumbItem href="#" icon={HiHome}>
         Home
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Recipes</BreadcrumbItem>
       <BreadcrumbItem>{category?.Name}</BreadcrumbItem>
     </Breadcrumb>
+    </div>
   );
 }
 
 function Recipes() {
   const location = useLocation();
   const category: Category = location.state?.category as Category || undefined;
-  return <div>
+  return <div className="flex flex-col items-center gap-4 w-full">
     <MyBreadCrumb category={category}/>
     <Outlet />
-    <h5>Recipes page</h5>
   </div>  ;
 }
 
