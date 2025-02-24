@@ -13,10 +13,16 @@ export type Origin = {
 }
 
 export type Recipe = {
-  id: number;
-  slug: string;
+  Id: number;
   Name: string;
+  Category: Category;
+  Origin: Origin;
+  Date_published: string;
   Ingredients: string[];
-  instructions: string;
+  Keywords: string[];
+  Instructions: string;
   Description: string;
+  Calories: number;
+  Protein: number;
+  Rating: number;
 };

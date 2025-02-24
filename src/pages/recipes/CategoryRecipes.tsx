@@ -1,13 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { api } from '../../services/api';
 import { Recipe, Category } from '../../types/types';
 import Spinner from '../../components/Spinner';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'flowbite-react';
 import { GrTrophy } from "react-icons/gr";
-import { PiStarFill } from "react-icons/pi";
 import { getDummyData, getRandomFloatInRange, getRandomIntInrange } from '../../services/helper';
-import MyCarousel from '../../components/MyCarousel';
+import { CircleChevronLeft, CircleChevronRight } from 'lucide-react';
+import StarRating from '../../components/StarRating';
 
 const fetchRecipesByCategory =  async (slug, setRecipes, setCategory) => {
   try {
@@ -59,29 +59,26 @@ function CategoryRecipes() {
     <div className='mt-4 flex w-full flex-col items-center gap-4 text-center'>
       <GrTrophy className='font-main text-2xl' />
       <h3 className='font-highlight text-3xl font-bold uppercase tracking-wider'>top rated {category.Name} recipes</h3>
-      <div className='h-96 w-full bg-slate-600 pt-4'>
-        <MyCarousel>
+      <div className='h-96 w-full pt-4'>
+        <Carousel indicators={false} slide={false}
+        leftControl={<CircleChevronLeft size={36} color='#D70654'/>} rightControl={<CircleChevronRight size={36} color='#D70654'/>}>
           {recipes.slice(0, 5).map((recipe, index) => {
             const reviews = getRandomIntInrange(100, 500);
             const rating = getRandomFloatInRange(3, 5);
             return (
-            <div className='flex flex-col items-center gap-2 h-full py-2' key={index}>
-              <img src={getDummyData().filename} alt={recipe.Name} className='w-72 h-64 object-cover rounded shadow-lg' />
+            <div className='flex h-full flex-col items-center gap-2 py-2 px-2' key={index}>
+              <img src={getDummyData().filename} alt={recipe.Name} className='h-64 w-64 rounded object-cover shadow-lg' />
               <div className='flex flex-col items-center gap-2'>
-                <div className='flex gap-1'>
-                  <PiStarFill className='text-yellow-500' />
-                  <PiStarFill className='text-yellow-500' />
-                  <PiStarFill className='text-yellow-500' />
-                  <PiStarFill className='text-yellow-500' />
-                  <PiStarFill className='text-yellow-500' />
-                </div>
-                <h3 className='text-xs font-bold text-gray-500 uppercase'>{reviews} reviews / {rating} average</h3>
+                <StarRating />
+                <h3 className='text-xs font-bold uppercase text-gray-500'>{reviews} reviews / {rating} average</h3>
               </div>
-              <h3 className='text-lg font-bold font-highlight'>{recipe.Name}</h3>
+              <Link to={`/recipes/${recipe.Id}`} state={{ category, recipe}}>
+                <h3 className='font-highlight text-lg font-bold'>{recipe.Name}</h3>
+              </Link>
             </div>
           );
         })}
-        </MyCarousel>
+        </Carousel>
       </div>
     </div>
   </div>);
