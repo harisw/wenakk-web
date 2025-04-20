@@ -27,7 +27,7 @@ ReactDOM.createRoot(root!).render(
         <Route path="/recipes" element={<Recipes />} >
           <Route path="popular" element={<Popular />} />
           <Route path="category/:slug" element={<CategoryRecipes />} />
-          <Route path=":id" element={<RecipeDetail />} />
+          <Route path=":slug" element={<RecipeDetail />} />
         </Route>
       </Routes>
     </Layout>

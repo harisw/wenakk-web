@@ -108,7 +108,6 @@ const fetchCategories = async (setLoading, setData) => {
   }
 }
 
-
 function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
@@ -142,12 +141,12 @@ function Home() {
       </div>
       <div className="mb-4 grid grid-cols-2 gap-5">
         {categories.map((category, index) => (
-          <Link to={`/recipes/category/${category.Slug}`} key={index}
+          <Link to={`/recipes/category/${category.slug}`} key={index}
           state={{ category }}>
           <ImageCard
             key={index}
             filename={dummmyHighlights[index].filename}
-            caption={category.Name}
+            caption={category.name}
           />
           </Link>
         ))}

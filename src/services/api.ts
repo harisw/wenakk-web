@@ -15,7 +15,7 @@ async function fetchData(endpoint: string, options = {}) {
 
 export const api = {
   getCategories: () => fetchData('/categories'),
-  getOrigins: () => fetchData('/origins'),
-  getRecipeById: (recipeId: string)  => fetchData(`/recipes/${recipeId}`),
+  getTopRecentRecipes: (limit: number)  => fetchData(`/recipes/get-top-recent?limit=${limit}`),
+  getRecipe: (slug: string)  => fetchData(`/recipes/${slug}`),
   getRecipesByCategory: (categorySlug: string) => fetchData(`/recipes/category/${categorySlug}`)
 }

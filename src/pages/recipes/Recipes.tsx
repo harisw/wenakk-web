@@ -17,8 +17,8 @@ const MyBreadCrumb: React.FC<MyBreadCrumbProps> = ({ category, recipe }) =>{
         Home
       </BreadcrumbItem>
       <BreadcrumbItem href="#">Recipes</BreadcrumbItem>
-      <BreadcrumbItem>{category?.Name}</BreadcrumbItem>
-      <BreadcrumbItem>{recipe?.Name}</BreadcrumbItem>
+      <BreadcrumbItem>{category?.name}</BreadcrumbItem>
+      <BreadcrumbItem>{recipe?.name}</BreadcrumbItem>
     </Breadcrumb>
     </div>
   );
